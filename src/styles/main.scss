@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;700&display=swap');
+@import url('https://use.fontawesome.com/releases/v5.2.0/css/all.css');
+
+@import './variables.scss';
+
+* {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  list-style: none;
+}
+.fa, .fas {
+  font-family: "Font Awesome 5 Free";
+}
+.container {
+  margin: 0 auto;
+  width: 850px;
+}
+.btn {
+  color: #fff;
+  cursor: pointer;
+  background-color: $primary;
+  padding: 12px 24px;
+  transition: all .3s linear;
+  &:hover {
+    background-color: $dark-primary; 
+  }
+}
+.disabled-btn {
+  background-color: #e4e4e4;
+  color: #b4b4b4;
+  padding: 12px 24px;
+  pointer-events: none;
+}
