@@ -144,6 +144,7 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    SEARCH: (state) => state.search,
     LOADING: (state) => state.loading,
     COLUMN_TITLES: (state) => state.columnTitles,
     TITLE_SORTED_COLUMN: (state) => state.titleSortedColumn,
@@ -157,11 +158,14 @@ export default new Vuex.Store({
     //  Фильтрация по строке поиска
     FILTER_USERS: (state) => {
       let filteredArray = []
-      let search = state.search.toLowerCase()
-      
+
       state.users.forEach(user => {
-        let userValues = Object.values(user)
-        if ([userValues].every(value => value.toString().toLowerCase().indexOf(search) != -1)) { 
+        let userValues =  Object.values(user)
+
+        //  Удаляем значения description и address
+        userValues = userValues.slice(0, userValues.length - 2)
+        let str = userValues.reduce((a, b) => a.toString() + b.toString())
+        if (str.includes(state.search)) {
           filteredArray.push(user)
         }
       })

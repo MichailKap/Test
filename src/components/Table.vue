@@ -42,11 +42,11 @@
           @click="selectRow(user)"
           :class="{ 'active-row' : selectedUser == user }"
         >
-          <td class="table__cell">{{ user.id }}</td>
-          <td class="table__cell">{{ user.firstName }}</td>
-          <td class="table__cell">{{ user.lastName }}</td>
-          <td class="table__cell">{{ user.email }}</td>
-          <td class="table__cell">{{ user.phone }}</td>
+          <td :inner-html.prop="user.id | highlightText(SEARCH)" class="table__cell"></td>
+          <td :inner-html.prop="user.firstName | highlightText(SEARCH)" class="table__cell"></td>
+          <td :inner-html.prop="user.lastName | highlightText(SEARCH)" class="table__cell"></td>
+          <td :inner-html.prop="user.email | highlightText(SEARCH)" class="table__cell"></td>
+          <td :inner-html.prop="user.phone | highlightText(SEARCH)" class="table__cell"></td>
         </tr>
       </tbody>
     </table>
@@ -138,8 +138,18 @@ export default {
       'USERS',
       'LOADING',
       'COLUMN_TITLES',
-      'TITLE_SORTED_COLUMN'
+      'TITLE_SORTED_COLUMN',
+      'SEARCH'
     ])
+  },
+  filters: {
+    highlightText: (value, search) => {
+      let str = value.toString()
+      if (str.includes(search)) {
+        return str.replace(search, `<span>${search}</span>`)
+      }
+      return str
+    }
   }
 }
 </script>
